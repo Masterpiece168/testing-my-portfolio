@@ -485,3 +485,82 @@ if (portsListContainer && portSearchInput) {
     // Initial render when loading page
     renderPorts();
 }
+
+// --- HTTP STATUS CODE EXPLORER LOGIC ---
+const httpStatusCodes = [
+    { code: 200, name: "OK", category: "2xx", description: "Standard successful HTTP request. The resource has been fetched and transmitted." },
+    { code: 201, name: "Created", category: "2xx", description: "Request fulfilled and a new resource was created as a result." },
+    { code: 204, name: "No Content", category: "2xx", description: "Server successfully processed the request, but is not returning any content." },
+    { code: 301, name: "Moved Permanently", category: "3xx", description: "Target resource has been assigned a new permanent URI." },
+    { code: 302, name: "Found (Temporary Redirect)", category: "3xx", description: "Target resource resides temporarily under a different URI." },
+    { code: 304, name: "Not Modified", category: "3xx", description: "Indicates that the resource has not been modified since the last request (uses cache)." },
+    { code: 400, name: "Bad Request", category: "4xx", description: "Server cannot process the request due to client syntax error or invalid framing." },
+    { code: 401, name: "Unauthorized", category: "4xx", description: "Authentication is required and has failed or has not yet been provided." },
+    { code: 403, name: "Forbidden", category: "4xx", description: "Client does not have access rights to the content, even if authenticated." },
+    { code: 404, name: "Not Found", category: "4xx", description: "Server cannot find the requested resource or URL." },
+    { code: 429, name: "Too Many Requests", category: "4xx", description: "The user has sent too many requests in a given amount of time (rate limiting)." },
+    { code: 500, name: "Internal Server Error", category: "5xx", description: "Server encountered an unexpected condition that prevented it from fulfilling request." },
+    { code: 502, name: "Bad Gateway", category: "5xx", description: "Server acting as a gateway/proxy received an invalid response from upstream server." },
+    { code: 503, name: "Service Unavailable", category: "5xx", description: "Server is not ready to handle the request (down for maintenance or overloaded)." },
+    { code: 504, name: "Gateway Timeout", category: "5xx", description: "Server acting as a gateway did not receive a timely response from upstream server." }
+];
+
+const httpListContainer = document.getElementById('http-list');
+const httpSearchInput = document.getElementById('http-search');
+const httpFilterBtns = document.querySelectorAll('.http-filter-btn');
+
+if (httpListContainer && httpSearchInput) {
+    let currentCategory = 'all';
+    let searchQuery = '';
+
+    function renderHttpCodes() {
+        httpListContainer.innerHTML = '';
+
+        const filtered = httpStatusCodes.filter(item => {
+            const matchesCat = currentCategory === 'all' || item.category === currentCategory;
+            const matchesQuery = item.code.toString().includes(searchQuery) ||
+                                 item.name.toLowerCase().includes(searchQuery) ||
+                                 item.description.toLowerCase().includes(searchQuery);
+            return matchesCat && matchesQuery;
+        });
+
+        if (filtered.length === 0) {
+            httpListContainer.innerHTML = '<p style="color: #888; text-align: center; margin-top: 10px;">No matching HTTP status codes found.</p>';
+            return;
+        }
+
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'port-card';
+            card.innerHTML = `
+                <div class="port-info">
+                    <h2>${item.code} ${item.name}</h2>
+                    <p>${item.description}</p>
+                </div>
+                <div class="port-badge-group">
+                    <span class="code-badge badge-${item.category}">${item.category}</span>
+                </div>
+            `;
+            httpListContainer.appendChild(card);
+        });
+    }
+
+    // Search event
+    httpSearchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        renderHttpCodes();
+    });
+
+    // Category filter events
+    httpFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            httpFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentCategory = btn.dataset.category;
+            renderHttpCodes();
+        });
+    });
+
+    // Initial render
+    renderHttpCodes();
+}

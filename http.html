@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | HTTP Status Codes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="portfolio-card">
+        <header>
+            <nav class="navbar">
+                <span class="logo">Sovichea.dev</span>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+                <div id="nav-links" class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="subnet.html" class="nav-link">Subnet Calc</a>
+                    <a href="ports.html" class="nav-link">Ports</a>
+                    <a href="http.html" class="nav-link active">HTTP Codes</a>
+                    <a href="quiz.html" class="nav-link">Quiz</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <button id="theme-toggle" class="theme-btn">🌙 Dark</button>
+                </div>
+            </nav>
+            <h1>HTTP Status Code Explorer</h1>
+            <p class="subtitle">Layer 7 web response code reference</p>
+        </header>
+
+        <main>
+            <div class="filter-controls">
+                <input type="text" id="http-search" placeholder="Search by code or keyword (e.g., 404, Unauthorized, Gateway)..." />
+                
+                <div class="filter-buttons">
+                    <button class="http-filter-btn active" data-category="all">All</button>
+                    <button class="http-filter-btn" data-category="2xx">2xx Success</button>
+                    <button class="http-filter-btn" data-category="3xx">3xx Redirect</button>
+                    <button class="http-filter-btn" data-category="4xx">4xx Client Err</button>
+                    <button class="http-filter-btn" data-category="5xx">5xx Server Err</button>
+                </div>
+            </div>
+
+            <!-- Dynamic HTTP status cards container -->
+            <div id="http-list" class="ports-grid"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

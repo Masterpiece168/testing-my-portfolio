@@ -731,3 +731,65 @@ body.dark-mode .port-filter-btn.active {
     background-color: #4ea8de;
     color: #ffffff;
 }
+
+/* 14. HTTP Status Code Explorer */
+.code-badge {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+}
+
+/* Category Badge Colors */
+.badge-2xx {
+    background-color: #dcfce7;
+    color: #15803d;
+}
+
+.badge-3xx {
+    background-color: #e0f2fe;
+    color: #0369a1;
+}
+
+.badge-4xx {
+    background-color: #fef3c7;
+    color: #b45309;
+}
+
+.badge-5xx {
+    background-color: #fee2e2;
+    color: #b91c1c;
+}
+
+/* Dark Mode Overrides for Badges */
+body.dark-mode .badge-2xx {
+    background-color: #064e3b;
+    color: #a7f3d0;
+}
+
+body.dark-mode .badge-3xx {
+    background-color: #1e3a8a;
+    color: #93c5fd;
+}
+
+body.dark-mode .badge-4xx {
+    background-color: #78350f;
+    color: #fde68a;
+}
+
+body.dark-mode .badge-5xx {
+    background-color: #7f1d1d;
+    color: #fecaca;
+}
+
+body.dark-mode .http-filter-btn {
+    background-color: #0f3460;
+    color: #a0a0a0;
+}
+
+body.dark-mode .http-filter-btn:hover,
+body.dark-mode .http-filter-btn.active {
+    background-color: #4ea8de;
+    color: #ffffff;
+}
