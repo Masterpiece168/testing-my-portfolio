@@ -223,3 +223,89 @@ body.dark-mode .tag-badge {
     background-color: #1f4287;
     color: #e0e0e0;
 }
+
+/* 8. Contact Form Styles */
+#contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #444444;
+}
+
+.form-group input,
+.form-group textarea {
+    padding: 10px 12px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: #007acc;
+}
+
+.submit-btn {
+    background-color: #007acc;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: #005999;
+}
+
+.form-status {
+    font-size: 0.85rem;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.form-status.success {
+    color: #2e7d32;
+}
+
+.form-status.error {
+    color: #d32f2f;
+}
+
+/* Dark Mode Overrides for Form */
+body.dark-mode .form-group label {
+    color: #e0e0e0;
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea {
+    background-color: #0f3460;
+    border-color: #1f4287;
+    color: #ffffff;
+}
+
+body.dark-mode .submit-btn {
+    background-color: #4ea8de;
+}
+
+body.dark-mode .submit-btn:hover {
+    background-color: #3a86b7;
+}

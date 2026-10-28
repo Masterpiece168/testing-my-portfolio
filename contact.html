@@ -20,18 +20,28 @@
         </header>
 
         <main>
-            <section>
-                <p>Feel free to reach out to me through any of the links below:</p>
-                <ul class="contact-links">
-                    <li><strong>Email:</strong> phatsovichea@email.com</li>
-                    <li><strong>GitHub:</strong> github.com/Masterpiece168</li>
-                    <li><strong>LinkedIn:</strong> linkedin.com/in/phat-sovichea</li>
-                </ul>
-            </section>
+            <form id="contact-form" action="https://formspree.io/f/xnppdezq" method="POST">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="John Doe" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Hi, I'd like to talk about..." required></textarea>
+                </div>
+
+                <button type="submit" id="submit-btn" class="submit-btn">Send Message</button>
+                <div id="form-status" class="form-status"></div>
+            </form>
         </main>
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>

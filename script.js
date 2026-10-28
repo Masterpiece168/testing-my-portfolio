@@ -116,3 +116,56 @@ if (projectsContainer) {
     // Initial render when page loads
     renderProjects();
 }
+
+// --- CONTACT FORM VALIDATION & SUBMISSION ---
+const contactForm = document.getElementById('contact-form');
+const formStatus = document.getElementById('form-status');
+
+if (contactForm) {
+    contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault(); // Stop instant browser reload
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        // 1. Client-side Validation
+        if (!name || !email || !message) {
+            formStatus.className = 'form-status error';
+            formStatus.textContent = 'Please fill out all fields.';
+            return;
+        }
+
+        // Basic Email Regex Check
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            formStatus.className = 'form-status error';
+            formStatus.textContent = 'Please enter a valid email address.';
+            return;
+        }
+
+        // 2. Submit Data via Fetch API
+        formStatus.className = 'form-status';
+        formStatus.textContent = 'Sending message...';
+
+        try {
+            const response = await fetch(contactForm.action, {
+                method: 'POST',
+                body: new FormData(contactForm),
+                headers: { 'Accept': 'application/json' }
+            });
+
+            if (response.ok) {
+                formStatus.className = 'form-status success';
+                formStatus.textContent = 'Thank you! Your message has been sent.';
+                contactForm.reset();
+            } else {
+                formStatus.className = 'form-status error';
+                formStatus.textContent = 'Oops! There was a problem submitting your form.';
+            }
+        } catch (error) {
+            formStatus.className = 'form-status error';
+            formStatus.textContent = 'Connection error. Please try again later.';
+        }
+    });
+}
