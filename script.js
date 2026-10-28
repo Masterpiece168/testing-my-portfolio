@@ -305,3 +305,103 @@ if (calcBtn && ipInput) {
     // Calculate default example on load
     calculateSubnet();
 }
+
+// --- KNOWLEDGE QUIZ WIDGET LOGIC ---
+const quizQuestions = [
+    {
+        question: "Which OSI layer is responsible for IP addressing and routing?",
+        options: ["Data Link (Layer 2)", "Network (Layer 3)", "Transport (Layer 4)", "Application (Layer 7)"],
+        answer: 1
+    },
+    {
+        question: "What is the default subnet mask for a Class C IPv4 network?",
+        options: ["255.0.0.0", "255.255.0.0", "255.255.255.0", "255.255.255.255"],
+        answer: 2
+    },
+    {
+        question: "Which port does SSH (Secure Shell) use by default?",
+        options: ["Port 21", "Port 22", "Port 80", "Port 443"],
+        answer: 1
+    },
+    {
+        question: "What does the command 'git commit' do?",
+        options: ["Pushes code to GitHub", "Downloads remote code", "Saves a snapshot of changes locally", "Deletes a branch"],
+        answer: 2
+    },
+    {
+        question: "In standard CIDR notation, how many usable hosts are in a /24 network?",
+        options: ["254", "256", "128", "512"],
+        answer: 0
+    }
+];
+
+const questionText = document.getElementById('question-text');
+const optionsContainer = document.getElementById('options-container');
+const questionCountText = document.getElementById('question-count');
+const scoreCountText = document.getElementById('score-count');
+const nextBtn = document.getElementById('next-btn');
+const quizContainer = document.getElementById('quiz-container');
+const resultScreen = document.getElementById('result-screen');
+const finalScoreText = document.getElementById('final-score-text');
+const restartBtn = document.getElementById('restart-btn');
+
+if (questionText && optionsContainer) {
+    let currentIdx = 0;
+    let score = 0;
+
+    function loadQuestion() {
+        const q = quizQuestions[currentIdx];
+        questionText.textContent = q.question;
+        questionCountText.textContent = `Question ${currentIdx + 1} of ${quizQuestions.length}`;
+        scoreCountText.textContent = `Score: ${score}`;
+        optionsContainer.innerHTML = '';
+        nextBtn.style.display = 'none';
+
+        q.options.forEach((optText, i) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.textContent = `${i + 1}. ${optText}`;
+            btn.addEventListener('click', () => selectOption(i, q.answer));
+            optionsContainer.appendChild(btn);
+        });
+    }
+
+    function selectOption(selectedIdx, correctIdx) {
+        const buttons = optionsContainer.querySelectorAll('.option-btn');
+        buttons.forEach((btn, i) => {
+            btn.disabled = true; // Lock buttons after choice
+            if (i === correctIdx) btn.classList.add('correct');
+            if (i === selectedIdx && selectedIdx !== correctIdx) btn.classList.add('incorrect');
+        });
+
+        if (selectedIdx === correctIdx) score++;
+
+        scoreCountText.textContent = `Score: ${score}`;
+        nextBtn.style.display = 'block';
+    }
+
+    nextBtn.addEventListener('click', () => {
+        currentIdx++;
+        if (currentIdx < quizQuestions.length) {
+            loadQuestion();
+        } else {
+            showResults();
+        }
+    });
+
+    function showResults() {
+        quizContainer.style.display = 'none';
+        resultScreen.style.display = 'block';
+        finalScoreText.textContent = `You scored ${score} out of ${quizQuestions.length}!`;
+    }
+
+    restartBtn.addEventListener('click', () => {
+        currentIdx = 0;
+        score = 0;
+        resultScreen.style.display = 'none';
+        quizContainer.style.display = 'block';
+        loadQuestion();
+    });
+
+    loadQuestion();
+}

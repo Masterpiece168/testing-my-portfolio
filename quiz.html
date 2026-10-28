@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Knowledge Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="portfolio-card">
+        <header>
+            <nav class="navbar">
+                <span class="logo">Sovichea.dev</span>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+                <div id="nav-links" class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="subnet.html" class="nav-link">Subnet Calc</a>
+                    <a href="quiz.html" class="nav-link active">Quiz</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <button id="theme-toggle" class="theme-btn">🌙 Dark</button>
+                </div>
+            </nav>
+            <h1>Networking & CS Quiz</h1>
+            <p class="subtitle">Test your foundational knowledge</p>
+        </header>
+
+        <main>
+            <div id="quiz-container" class="quiz-container">
+                <div class="quiz-header">
+                    <span id="question-count" class="question-count">Question 1 of 5</span>
+                    <span id="score-count" class="score-count">Score: 0</span>
+                </div>
+
+                <div id="quiz-body">
+                    <h2 id="question-text">Loading question...</h2>
+                    <div id="options-container" class="options-container"></div>
+                </div>
+
+                <div id="quiz-footer">
+                    <button id="next-btn" class="submit-btn" style="display: none;">Next Question</button>
+                </div>
+            </div>
+
+            <!-- Final Result Screen (Hidden by default) -->
+            <div id="result-screen" class="result-card" style="display: none;">
+                <h2>Quiz Complete! 🎉</h2>
+                <p id="final-score-text">You scored 0 out of 5</p>
+                <button id="restart-btn" class="submit-btn">Try Again</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
