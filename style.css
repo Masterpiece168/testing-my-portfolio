@@ -138,3 +138,88 @@ body.dark-mode .theme-btn {
     border-color: #4ea8de;
     color: #ffffff;
 }
+
+/* 7. Search & Filter Bar */
+.filter-controls {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#search-input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid #d0d7de;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    outline: none;
+}
+
+#search-input:focus {
+    border-color: #007acc;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background-color: #eef2f5;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #555555;
+    transition: all 0.2s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: #007acc;
+    color: #ffffff;
+}
+
+/* Tag Badges on Cards */
+.tags {
+    display: flex;
+    gap: 6px;
+    margin-top: 10px;
+}
+
+.tag-badge {
+    background-color: #e2e8f0;
+    color: #334155;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+/* Dark Mode Overrides for Filters */
+body.dark-mode #search-input {
+    background-color: #0f3460;
+    border-color: #1f4287;
+    color: #ffffff;
+}
+
+body.dark-mode .filter-btn {
+    background-color: #0f3460;
+    color: #a0a0a0;
+}
+
+body.dark-mode .filter-btn:hover,
+body.dark-mode .filter-btn.active {
+    background-color: #4ea8de;
+    color: #ffffff;
+}
+
+body.dark-mode .tag-badge {
+    background-color: #1f4287;
+    color: #e0e0e0;
+}

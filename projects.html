@@ -20,19 +20,23 @@
         </header>
 
         <main>
-            <section class="project-item">
-                <h2>Arduino Calculator</h2>
-                <p>Built an interactive calculator using an Arduino microcontroller, matrix keypad, and LCD display.</p>
-            </section>
+            <!-- Search & Filter Controls -->
+            <div class="filter-controls">
+                <input type="text" id="search-input" placeholder="Search projects..." />
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="Networking">Networking</button>
+                    <button class="filter-btn" data-category="C++">C++</button>
+                    <button class="filter-btn" data-category="Web">Web</button>
+                </div>
+            </div>
 
-            <section class="project-item">
-                <h2>C++ Sorting Visualizer</h2>
-                <p>Implemented array manipulations and sorting algorithms to visualize how data ordering works.</p>
-            </section>
+            <!-- Dynamic Projects Container -->
+            <div id="projects-container"></div>
         </main>
     </div>
 
     <script src="script.js"></script>
-
 </body>
 </html>
