@@ -24,10 +24,24 @@ body {
 /* 3. Navigation Bar Styling */
 .navbar {
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 25px;
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
 .navbar a {
@@ -46,6 +60,15 @@ body {
     color: #007acc;
     border-bottom: 2px solid #007acc;
     padding-bottom: 4px;
+}
+
+.hamburger-btn {
+    display: none; /* Hidden on desktop screens */
+    background: transparent;
+    border: none;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #333333;
 }
 
 /* 4. Typography & Headers */
@@ -308,4 +331,52 @@ body.dark-mode .submit-btn {
 
 body.dark-mode .submit-btn:hover {
     background-color: #3a86b7;
+}
+
+/* 9. Mobile Responsive Media Queries */
+@media (max-width: 600px) {
+    body {
+        padding: 15px 10px;
+    }
+
+    .portfolio-card {
+        padding: 20px;
+    }
+
+    .hamburger-btn {
+        display: block; /* Show hamburger button on small screens */
+    }
+
+    .nav-links {
+        display: none; /* Hide navigation links by default on mobile */
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 1px solid #e0e0e0;
+        align-items: flex-start;
+    }
+
+    .nav-links.active {
+        display: flex; /* Display links when active class is toggled */
+    }
+
+    .theme-btn {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+/* Dark Mode Overrides for Mobile Menu */
+body.dark-mode .logo {
+    color: #ffffff;
+}
+
+body.dark-mode .hamburger-btn {
+    color: #ffffff;
+}
+
+body.dark-mode .nav-links {
+    border-top-color: #1f4287;
 }
