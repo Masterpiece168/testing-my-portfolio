@@ -496,3 +496,64 @@ body.dark-mode .repo-desc,
 body.dark-mode .repo-stars {
     color: #cbd5e1;
 }
+
+/* 11. Subnet Calculator Tool */
+.subnet-tool {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.subnet-results-card {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.result-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.result-label {
+    font-weight: 600;
+    color: #475569;
+}
+
+.result-val {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    color: #007acc;
+}
+
+/* Dark Mode Overrides for Subnet Tool */
+body.dark-mode .subnet-results-card {
+    background-color: #0f3460;
+    border-color: #1f4287;
+}
+
+body.dark-mode .result-row {
+    border-bottom-color: #1f4287;
+}
+
+body.dark-mode .result-label {
+    color: #cbd5e1;
+}
+
+body.dark-mode .result-val {
+    color: #4ea8de;
+}

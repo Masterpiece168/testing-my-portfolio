@@ -240,3 +240,68 @@ if (githubStatsContainer && githubReposContainer) {
 
     fetchGitHubData();
 }
+
+// --- IPV4 SUBNET CALCULATOR LOGIC ---
+const calcBtn = document.getElementById('calc-btn');
+const ipInput = document.getElementById('ip-input');
+
+if (calcBtn && ipInput) {
+    // Convert 32-bit integer to IP string
+    function intToIp(int) {
+        return [
+            (int >>> 24) & 255,
+            (int >>> 16) & 255,
+            (int >>> 8) & 255,
+            int & 255
+        ].join('.');
+    }
+
+    // Convert IP string to 32-bit integer
+    function ipToInt(ip) {
+        return ip.split('.').reduce((acc, octet) => (acc << 8) + parseInt(octet, 10), 0) >>> 0;
+    }
+
+    function calculateSubnet() {
+        const inputVal = ipInput.value.trim();
+        const parts = inputVal.split('/');
+
+        // Basic CIDR notation validation
+        if (parts.length !== 2) {
+            alert('Please enter a valid CIDR notation format, e.g., 192.168.1.100/24');
+            return;
+        }
+
+        const ipStr = parts[0];
+        const cidr = parseInt(parts[1], 10);
+
+        const ipRegex = /^^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$$/;
+        if (!ipRegex.test(ipStr) || isNaN(cidr) || cidr < 0 || cidr > 32) {
+            alert('Invalid IP address or CIDR prefix (must be between /0 and /32).');
+            return;
+        }
+
+        // Bitwise Subnet Logic
+        const ipInt = ipToInt(ipStr);
+        const maskInt = cidr === 0 ? 0 : (~0 << (32 - cidr)) >>> 0;
+        const networkInt = (ipInt & maskInt) >>> 0;
+        const broadcastInt = (networkInt | (~maskInt >>> 0)) >>> 0;
+
+        const totalHosts = cidr >= 31 ? 0 : Math.pow(2, 32 - cidr) - 2;
+        const firstHostInt = cidr >= 31 ? networkInt : networkInt + 1;
+        const lastHostInt = cidr >= 31 ? broadcastInt : broadcastInt - 1;
+
+        // Render Results
+        document.getElementById('res-network').textContent = `${intToIp(networkInt)} /${cidr}`;
+        document.getElementById('res-mask').textContent = intToIp(maskInt);
+        document.getElementById('res-broadcast').textContent = intToIp(broadcastInt);
+        document.getElementById('res-range').textContent = cidr >= 31 
+            ? 'N/A (Point-to-Point)' 
+            : `${intToIp(firstHostInt)} - ${intToIp(lastHostInt)}`;
+        document.getElementById('res-hosts').textContent = totalHosts.toLocaleString();
+    }
+
+    calcBtn.addEventListener('click', calculateSubnet);
+    
+    // Calculate default example on load
+    calculateSubnet();
+}

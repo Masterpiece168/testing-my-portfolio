@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Subnet Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="portfolio-card">
+        <header>
+            <nav class="navbar">
+                <span class="logo">Sovichea.dev</span>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+                <div id="nav-links" class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="subnet.html" class="nav-link active">Subnet Calc</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <button id="theme-toggle" class="theme-btn">🌙 Dark</button>
+                </div>
+            </nav>
+            <h1>IPv4 Subnet Calculator</h1>
+            <p class="subtitle">Network Engineering Utility Tool</p>
+        </header>
+
+        <main>
+            <div class="subnet-tool">
+                <div class="form-group">
+                    <label for="ip-input">IP Address & CIDR Prefix</label>
+                    <input type="text" id="ip-input" placeholder="e.g., 192.168.1.100/24" value="192.168.1.100/24">
+                </div>
+                <button id="calc-btn" class="submit-btn">Calculate Subnet</button>
+
+                <div id="subnet-results" class="subnet-results-card">
+                    <div class="result-row">
+                        <span class="result-label">Network Address:</span>
+                        <span id="res-network" class="result-val">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Subnet Mask:</span>
+                        <span id="res-mask" class="result-val">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Broadcast Address:</span>
+                        <span id="res-broadcast" class="result-val">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Usable Host Range:</span>
+                        <span id="res-range" class="result-val">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Total Usable Hosts:</span>
+                        <span id="res-hosts" class="result-val">-</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
