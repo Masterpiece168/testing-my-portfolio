@@ -564,3 +564,96 @@ if (httpListContainer && httpSearchInput) {
     // Initial render
     renderHttpCodes();
 }
+
+// --- BASE & NUMBER SYSTEM CONVERTER LOGIC ---
+const decInput = document.getElementById('base-dec');
+const binInput = document.getElementById('base-bin');
+const hexInput = document.getElementById('base-hex');
+const octInput = document.getElementById('base-oct');
+
+const textInput = document.getElementById('text-input');
+const textBinResult = document.getElementById('text-bin-result');
+const textHexResult = document.getElementById('text-hex-result');
+
+if (decInput && binInput && hexInput && octInput) {
+
+    function updateBasesFromDec(decVal) {
+        if (isNaN(decVal) || decVal === '') {
+            binInput.value = '';
+            hexInput.value = '';
+            octInput.value = '';
+            return;
+        }
+        const num = BigInt(decVal);
+        binInput.value = num.toString(2);
+        hexInput.value = num.toString(16).toUpperCase();
+        octInput.value = num.toString(8);
+    }
+
+    // Input handlers
+    decInput.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        if (val === '') { updateBasesFromDec(''); return; }
+        if (/^\d+$/.test(val)) updateBasesFromDec(val);
+    });
+
+    binInput.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        if (/^[01]+$/.test(val)) {
+            const dec = BigInt('0b' + val).toString(10);
+            decInput.value = dec;
+            hexInput.value = BigInt(dec).toString(16).toUpperCase();
+            octInput.value = BigInt(dec).toString(8);
+        } else if (val === '') updateBasesFromDec('');
+    });
+
+    hexInput.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        if (/^[0-9a-fA-F]+$/.test(val)) {
+            const dec = BigInt('0x' + val).toString(10);
+            decInput.value = dec;
+            binInput.value = BigInt(dec).toString(2);
+            octInput.value = BigInt(dec).toString(8);
+        } else if (val === '') updateBasesFromDec('');
+    });
+
+    octInput.addEventListener('input', (e) => {
+        const val = e.target.value.trim();
+        if (/^[0-7]+$/.test(val)) {
+            const dec = BigInt('0o' + val).toString(10);
+            decInput.value = dec;
+            binInput.value = BigInt(dec).toString(2);
+            hexInput.value = BigInt(dec).toString(16).toUpperCase();
+        } else if (val === '') updateBasesFromDec('');
+    });
+
+    // Text to Binary/Hex Encoder
+    if (textInput && textBinResult && textHexResult) {
+        function encodeText() {
+            const str = textInput.value;
+            if (!str) {
+                textBinResult.textContent = '-';
+                textHexResult.textContent = '-';
+                return;
+            }
+
+            let binArr = [];
+            let hexArr = [];
+
+            for (let i = 0; i < str.length; i++) {
+                const code = str.charCodeAt(i);
+                binArr.push(code.toString(2).padStart(8, '0'));
+                hexArr.push(code.toString(16).padStart(2, '0').toUpperCase());
+            }
+
+            textBinResult.textContent = binArr.join(' ');
+            textHexResult.textContent = hexArr.join(' ');
+        }
+
+        textInput.addEventListener('input', encodeText);
+        encodeText(); // Initial run
+    }
+
+    // Initialize base conversion values on load
+    updateBasesFromDec(decInput.value);
+}

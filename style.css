@@ -793,3 +793,54 @@ body.dark-mode .http-filter-btn.active {
     background-color: #4ea8de;
     color: #ffffff;
 }
+
+/* 15. Base & Number System Converter */
+.converter-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.converter-grid input {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+}
+
+.section-divider {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 25px 0;
+}
+
+.text-encoder-section h2 {
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+}
+
+.encoded-results {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media (max-width: 600px) {
+    .converter-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dark Mode Overrides for Converter */
+body.dark-mode .section-divider {
+    border-top-color: #1f4287;
+}
+
+body.dark-mode .encoded-results {
+    background-color: #0f3460;
+    border-color: #1f4287;
+}

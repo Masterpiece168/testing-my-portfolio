@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Base Converter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="portfolio-card">
+        <header>
+            <nav class="navbar">
+                <span class="logo">Sovichea.dev</span>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+                <div id="nav-links" class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="subnet.html" class="nav-link">Subnet Calc</a>
+                    <a href="ports.html" class="nav-link">Ports</a>
+                    <a href="http.html" class="nav-link">HTTP Codes</a>
+                    <a href="converter.html" class="nav-link active">Converter</a>
+                    <a href="quiz.html" class="nav-link">Quiz</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <button id="theme-toggle" class="theme-btn">🌙 Dark</button>
+                </div>
+            </nav>
+            <h1>Base & Number Converter</h1>
+            <p class="subtitle">Convert values between Decimal, Binary, Hexadecimal, & Octal</p>
+        </header>
+
+        <main>
+            <!-- Real-time Number Base Converter -->
+            <div class="converter-grid">
+                <div class="form-group">
+                    <label for="base-dec">Decimal (Base 10)</label>
+                    <input type="text" id="base-dec" placeholder="e.g. 255" value="255">
+                </div>
+
+                <div class="form-group">
+                    <label for="base-bin">Binary (Base 2)</label>
+                    <input type="text" id="base-bin" placeholder="e.g. 11111111">
+                </div>
+
+                <div class="form-group">
+                    <label for="base-hex">Hexadecimal (Base 16)</label>
+                    <input type="text" id="base-hex" placeholder="e.g. FF">
+                </div>
+
+                <div class="form-group">
+                    <label for="base-oct">Octal (Base 8)</label>
+                    <input type="text" id="base-oct" placeholder="e.g. 377">
+                </div>
+            </div>
+
+            <hr class="section-divider">
+
+            <!-- Text to Binary / Hex Encoder -->
+            <div class="text-encoder-section">
+                <h2>Text to Binary & Hex Encoder</h2>
+                <div class="form-group">
+                    <label for="text-input">Plain Text</label>
+                    <input type="text" id="text-input" placeholder="Type text here... (e.g. Hello)" value="Hello">
+                </div>
+
+                <div class="encoded-results">
+                    <div class="result-row">
+                        <span class="result-label">Binary ASCII:</span>
+                        <span id="text-bin-result" class="result-val">-</span>
+                    </div>
+                    <div class="result-row">
+                        <span class="result-label">Hex ASCII:</span>
+                        <span id="text-hex-result" class="result-val">-</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
