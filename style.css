@@ -90,3 +90,51 @@ p, li {
 .contact-links li {
     margin-bottom: 10px;
 }
+
+/* 6. Dark Mode Styles */
+body.dark-mode {
+    background-color: #1a1a2e;
+    color: #e0e0e0;
+}
+
+body.dark-mode .portfolio-card {
+    background-color: #16213e;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode h1, 
+body.dark-mode h2 {
+    color: #ffffff;
+}
+
+body.dark-mode .navbar a {
+    color: #a0a0a0;
+}
+
+body.dark-mode .navbar a:hover,
+body.dark-mode .navbar a.active {
+    color: #4ea8de;
+    border-color: #4ea8de;
+}
+
+body.dark-mode .project-item {
+    background-color: #0f3460;
+    border-left-color: #4ea8de;
+}
+
+/* Button Styling */
+.theme-btn {
+    margin-left: auto;
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 4px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+body.dark-mode .theme-btn {
+    border-color: #4ea8de;
+    color: #ffffff;
+}
