@@ -179,3 +179,64 @@ if (hamburgerBtn && navLinks) {
         navLinks.classList.toggle('active');
     });
 }
+
+// --- LIVE GITHUB REST API INTEGRATION ---
+const githubUsername = 'Masterpiece168';
+const githubStatsContainer = document.getElementById('github-stats');
+const githubReposContainer = document.getElementById('github-repos');
+
+if (githubStatsContainer && githubReposContainer) {
+    async function fetchGitHubData() {
+        try {
+            // 1. Fetch Profile Info
+            const profileResponse = await fetch(`https://api.github.com/users/${githubUsername}`);
+            if (!profileResponse.ok) throw new Error('Failed to fetch profile');
+            const profileData = await profileResponse.json();
+
+            // Render Stats
+            githubStatsContainer.innerHTML = `
+                <div class="stat-box">
+                    <span class="stat-number">${profileData.public_repos}</span>
+                    <span class="stat-label">Public Repos</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">${profileData.followers}</span>
+                    <span class="stat-label">Followers</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-number">${profileData.following}</span>
+                    <span class="stat-label">Following</span>
+                </div>
+            `;
+
+            // 2. Fetch Latest Public Repos (sorted by recently updated)
+            const reposResponse = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated&per_page=3`);
+            if (!reposResponse.ok) throw new Error('Failed to fetch repos');
+            const reposData = await reposResponse.json();
+
+            githubReposContainer.innerHTML = ''; // Clear loading text
+
+            reposData.forEach(repo => {
+                const repoCard = document.createElement('a');
+                repoCard.className = 'repo-card';
+                repoCard.href = repo.html_url;
+                repoCard.target = '_blank'; // Open link in new tab
+                repoCard.innerHTML = `
+                    <div class="repo-header">
+                        <span class="repo-title">📦 ${repo.name}</span>
+                        <span class="repo-stars">⭐ ${repo.stargazers_count}</span>
+                    </div>
+                    <p class="repo-desc">${repo.description || 'No description provided.'}</p>
+                `;
+                githubReposContainer.appendChild(repoCard);
+            });
+
+        } catch (error) {
+            console.error('GitHub API Error:', error);
+            githubStatsContainer.innerHTML = '<p class="loading-text">Unable to load GitHub stats.</p>';
+            githubReposContainer.innerHTML = '<p class="loading-text">Unable to load repositories.</p>';
+        }
+    }
+
+    fetchGitHubData();
+}
