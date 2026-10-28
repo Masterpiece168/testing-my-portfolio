@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio | Port Lookup</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="portfolio-card">
+        <header>
+            <nav class="navbar">
+                <span class="logo">Sovichea.dev</span>
+                <button id="hamburger-btn" class="hamburger-btn" aria-label="Toggle Navigation">☰</button>
+
+                <div id="nav-links" class="nav-links">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="projects.html" class="nav-link">Projects</a>
+                    <a href="subnet.html" class="nav-link">Subnet Calc</a>
+                    <a href="ports.html" class="nav-link active">Port Lookup</a>
+                    <a href="quiz.html" class="nav-link">Quiz</a>
+                    <a href="contact.html" class="nav-link">Contact</a>
+                    <button id="theme-toggle" class="theme-btn">🌙 Dark</button>
+                </div>
+            </nav>
+            <h1>Port & Protocol Lookup</h1>
+            <p class="subtitle">Quick reference guide for common network ports</p>
+        </header>
+
+        <main>
+            <div class="filter-controls">
+                <input type="text" id="port-search" placeholder="Search by port number, service, or keyword (e.g. 443, SSH, Web)..." />
+                
+                <div class="filter-buttons">
+                    <button class="port-filter-btn active" data-type="all">All</button>
+                    <button class="port-filter-btn" data-type="TCP">TCP</button>
+                    <button class="port-filter-btn" data-type="UDP">UDP</button>
+                    <button class="port-filter-btn" data-type="TCP/UDP">TCP & UDP</button>
+                </div>
+            </div>
+
+            <!-- Container where port cards will be rendered -->
+            <div id="ports-list" class="ports-grid"></div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

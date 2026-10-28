@@ -637,3 +637,97 @@ body.dark-mode .option-btn.incorrect {
     border-color: #f87171;
     color: #fecaca;
 }
+
+/* 13. Port & Protocol Lookup Tool */
+.ports-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.port-card {
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid #007acc;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.port-card:hover {
+    transform: translateX(3px);
+}
+
+.port-info h2 {
+    margin: 0 0 4px 0;
+    font-size: 1.05rem;
+    color: #1e293b;
+}
+
+.port-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.port-badge-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+}
+
+.port-number {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #007acc;
+}
+
+.transport-badge {
+    background-color: #e0f2fe;
+    color: #0369a1;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+/* Dark Mode Overrides for Port Lookup */
+body.dark-mode .port-card {
+    background-color: #0f3460;
+    border-color: #1f4287;
+    border-left-color: #4ea8de;
+}
+
+body.dark-mode .port-info h2 {
+    color: #ffffff;
+}
+
+body.dark-mode .port-info p {
+    color: #cbd5e1;
+}
+
+body.dark-mode .port-number {
+    color: #4ea8de;
+}
+
+body.dark-mode .transport-badge {
+    background-color: #1e3a8a;
+    color: #93c5fd;
+}
+
+body.dark-mode .port-filter-btn {
+    background-color: #0f3460;
+    color: #a0a0a0;
+}
+
+body.dark-mode .port-filter-btn:hover,
+body.dark-mode .port-filter-btn.active {
+    background-color: #4ea8de;
+    color: #ffffff;
+}

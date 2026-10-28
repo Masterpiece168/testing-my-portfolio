@@ -405,3 +405,83 @@ if (questionText && optionsContainer) {
 
     loadQuestion();
 }
+
+// --- PORT & PROTOCOL LOOKUP LOGIC ---
+const networkPorts = [
+    { port: 20, service: "FTP Data", transport: "TCP", description: "File Transfer Protocol for transferring data channels." },
+    { port: 21, service: "FTP Control", transport: "TCP", description: "File Transfer Protocol for command control and authentication." },
+    { port: 22, service: "SSH / SFTP", transport: "TCP", description: "Secure Shell for encrypted remote terminal sessions and file transfers." },
+    { port: 23, service: "Telnet", transport: "TCP", description: "Unencrypted text communications (legacy, non-secure)." },
+    { port: 25, service: "SMTP", transport: "TCP", description: "Simple Mail Transfer Protocol used for sending email between servers." },
+    { port: 53, service: "DNS", transport: "TCP/UDP", description: "Domain Name System translates domain names into IP addresses." },
+    { port: 67, service: "DHCP Server", transport: "UDP", description: "Dynamic Host Configuration Protocol server listener." },
+    { port: 68, service: "DHCP Client", transport: "UDP", description: "Dynamic Host Configuration Protocol client request port." },
+    { port: 80, service: "HTTP", transport: "TCP", description: "Hypertext Transfer Protocol for unencrypted web traffic." },
+    { port: 110, service: "POP3", transport: "TCP", description: "Post Office Protocol version 3 for retrieving email." },
+    { port: 123, service: "NTP", transport: "UDP", description: "Network Time Protocol synchronizes clocks across system network nodes." },
+    { port: 143, service: "IMAP", transport: "TCP", description: "Internet Message Access Protocol for managing and retrieving email." },
+    { port: 161, service: "SNMP", transport: "UDP", description: "Simple Network Management Protocol for monitoring network devices." },
+    { port: 443, service: "HTTPS", transport: "TCP", description: "Hypertext Transfer Protocol Secure encrypted via TLS/SSL." },
+    { port: 3389, service: "RDP", transport: "TCP/UDP", description: "Remote Desktop Protocol for Windows graphical desktop connections." }
+];
+
+const portsListContainer = document.getElementById('ports-list');
+const portSearchInput = document.getElementById('port-search');
+const portFilterBtns = document.querySelectorAll('.port-filter-btn');
+
+if (portsListContainer && portSearchInput) {
+    let selectedType = 'all';
+    let searchQuery = '';
+
+    function renderPorts() {
+        portsListContainer.innerHTML = '';
+
+        const filtered = networkPorts.filter(item => {
+            const matchesType = selectedType === 'all' || item.transport === selectedType;
+            const matchesQuery = item.port.toString().includes(searchQuery) ||
+                                 item.service.toLowerCase().includes(searchQuery) ||
+                                 item.description.toLowerCase().includes(searchQuery);
+            return matchesType && matchesQuery;
+        });
+
+        if (filtered.length === 0) {
+            portsListContainer.innerHTML = '<p style="color: #888; text-align: center; margin-top: 10px;">No matching ports found.</p>';
+            return;
+        }
+
+        filtered.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'port-card';
+            card.innerHTML = `
+                <div class="port-info">
+                    <h2>${item.service}</h2>
+                    <p>${item.description}</p>
+                </div>
+                <div class="port-badge-group">
+                    <span class="port-number">Port ${item.port}</span>
+                    <span class="transport-badge">${item.transport}</span>
+                </div>
+            `;
+            portsListContainer.appendChild(card);
+        });
+    }
+
+    // Event listener for search input
+    portSearchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        renderPorts();
+    });
+
+    // Event listeners for transport filter buttons (TCP, UDP, All)
+    portFilterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            portFilterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedType = btn.dataset.type;
+            renderPorts();
+        });
+    });
+
+    // Initial render when loading page
+    renderPorts();
+}
